@@ -12,7 +12,7 @@ def load_artifacts():
 model, feature_order = load_artifacts()
 
 st.set_page_config(page_title="SLA Breach Predictor", page_icon="⏰")
-st.title("🕒 SLA Breach Risk Predictor")
+st.title("SLA Breach Risk Predictor")
 st.write("Enter ticket details to estimate the probability of breaching its SLA.")
 
 col1, col2 = st.columns(2)
@@ -48,9 +48,9 @@ if st.button("Predict SLA Breach"):
 
     st.metric("Breach Probability", f"{prob:.1%}")
     if pred == 1:
-        st.error("⚠️ High risk ‑ SLA likely to be breached")
+        st.error("High risk ‑ SLA likely to be breached")
     else:
-        st.success("✅ Low risk ‑ SLA likely to be met")
+        st.success("Low risk ‑ SLA likely to be met")
         explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(new_ticket)
 
@@ -65,6 +65,6 @@ if st.button("Predict SLA Breach"):
     shap.save_html(shap_html_path, force_plot)
 
     st.markdown("---")
-    st.subheader("🔍 SHAP Explanation")
+    st.subheader("SHAP Explanation")
     components.html(open(shap_html_path, "r", encoding="utf-8").read(), height=400, scrolling=True)
 
